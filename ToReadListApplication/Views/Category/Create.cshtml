@@ -1,20 +1,17 @@
-﻿cshtml
-@model Category
+﻿@model Category
 @{
     ViewData["Title"] = "Create";
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create Category</h1>
-
-<div class="container d-flex flex-column justify-content-around align-items-around w-75">
-    <form method="post">
-        <div class="d-flex justify-content-between align-items-between">
-            <label for="Name">Category Name:</label>
+<div class="container d-flex flex-column justify-content-center align-items-center my-5 w-50">
+    <h1 class="mb-4">Add Category</h1>
+    <form method="post" class="w-100">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Category Name:</label>
             <input class="form-control" type="text" placeholder="Enter Category Name" asp-for="Name" />
         </div>
-
-        <input type="submit" class="btn btn-primary mt-3" value="Save Category" />
+        <input type="submit" class="btn btn-primary" value="Save Category" />
     </form>
 </div>

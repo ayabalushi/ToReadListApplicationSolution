@@ -15,8 +15,10 @@ namespace ToReadListApplication.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var Categories = _dbcontext.Categories.ToList();
+            return View(Categories);
         }
+
         // Create 
         public IActionResult Create()
         {
@@ -38,16 +40,16 @@ namespace ToReadListApplication.Controllers
             return View(obj);
         }
       
-        // تحديث الفئة
+        // Update
         public IActionResult Update(int id)
         {
-            var category = _dbcontext.Categories.Find(id); // البحث عن الفئة للتعديل
+            var category = _dbcontext.Categories.Find(id); 
 
             return View(category);
         }
 
         [HttpPost]
-        public IActionResult Update(Category obj) // تغيير النوع إلى Category
+        public IActionResult Update(Category obj) 
         {
             if (obj == null)
             {
@@ -55,7 +57,7 @@ namespace ToReadListApplication.Controllers
             }
             if (ModelState.IsValid)
             {
-                _dbcontext.Categories.Update(obj); // تحديث الفئة
+                _dbcontext.Categories.Update(obj); 
                 _dbcontext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -63,13 +65,13 @@ namespace ToReadListApplication.Controllers
             return View(obj);
         }
 
-        // حذف الفئة
+        // Remove
         public IActionResult Delete(int id)
         {
-            var category = _dbcontext.Categories.Find(id); // البحث عن الفئة للحذف
+            var category = _dbcontext.Categories.Find(id); 
             if (category is not null)
             {
-                _dbcontext.Categories.Remove(category); // حذف الفئة
+                _dbcontext.Categories.Remove(category); 
                 _dbcontext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

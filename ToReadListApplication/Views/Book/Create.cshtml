@@ -1,0 +1,45 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Create Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Book</h2>
+
+<form asp-action="Create">
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="control-label">Book Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter book name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="control-label">Description</label>
+        <textarea asp-for="Description" class="form-control" placeholder="Enter book description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="ImageUrl" class="control-label">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Enter image URL" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Rate" class="control-label">Rating</label>
+        <input asp-for="Rate" class="form-control" placeholder="Enter book rating" />
+        <span asp-validation-for="Rate" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="PublishDate" class="control-label">Publish Date</label>
+        <input asp-for="PublishDate" type="date" class="form-control" placeholder="Select publish date" />
+        <span asp-validation-for="PublishDate" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Category" class="control-label">Category</label>
+        <input asp-for="Category" class="form-control" placeholder="Enter book category" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

@@ -35,7 +35,7 @@ namespace ToReadListApplication
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=ToReadList}/{action=Index}/{id?}");
 
             app.Run();
         }

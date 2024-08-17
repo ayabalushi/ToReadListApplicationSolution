@@ -1,0 +1,41 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Update Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex flex-column justify-content-center align-items-center my-5 w-50">
+    <h1 class="mb-4">Update Book</h1>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <form method="post" class="w-100">
+        <div class="mb-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control mt-2" placeholder="Enter Book Name" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control mt-2" placeholder="Enter Book Description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Rate" class="control-label"></label>
+            <input asp-for="Rate" type="number" class="form-control mt-2" placeholder="Enter Book Rate" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CategoryId" class="control-label"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control mt-2"></select>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Update" />
+    </form>
+</div>

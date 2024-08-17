@@ -5,6 +5,7 @@ namespace ToReadListApplication.DbContextManager
 {
     public class ApplicationDbContext : DbContext
     {
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -20,33 +21,24 @@ namespace ToReadListApplication.DbContextManager
 
             modelBuilder.Entity<Book>()
                 .Property(t => t.Author)
-                .IsRequired()
                 .HasMaxLength(100); 
 
             modelBuilder.Entity<Book>()
                 .Property(t => t.Rate)
-                .IsRequired()
                 .HasDefaultValue(0); 
 
             modelBuilder.Entity<Book>()
                 .Property(t => t.ImageUrl)
-                .IsRequired()
-                .HasMaxLength(255); 
-
-            modelBuilder.Entity<Book>()
-                .Property(t => t.PublishDate)
-                .IsRequired();
+                .HasDefaultValue("")
+                .HasMaxLength(255);
 
             modelBuilder.Entity<Category>()
             .Property(c => c.Name)
-            .IsRequired()
             .HasMaxLength(50);
         }
 
         public DbSet<Book> Books {  get; set; }
         public DbSet<Category> Categories { get; set; }
-
-    
-
+        public DbSet<ToReadList> ToReadList { get; set; }
     }
 }

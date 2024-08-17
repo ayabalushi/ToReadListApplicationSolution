@@ -1,25 +1,18 @@
-﻿@model ToReadListApplication.Models.Category
+﻿@model Category
 @{
     ViewData["Title"] = "Update";
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Update Category</h1>
-
-<div class="container d-flex flex-column justify-content-around align-items-around w-75">
-    <form method="post">
-        <!-- Hidden input for Id -->
-        <input hidden asp-for="Id" />
-
+<div class="container d-flex flex-column justify-content-center align-items-center my-5 w-50">
+    <h1 class="mb-4">Update Category</h1>
+    <form method="post" class="w-100">
+        <div class="mb-3">
         <!-- Input for Name -->
         <label for="Name">Category Name:</label>
-        <input class="form-control" type="text" placeholder="Enter Category Name" asp-for="Name" />
-
-        <!-- Input for Description -->
-        <label for="Description">Category Description:</label>
-        <input class="form-control" type="text" placeholder="Enter Category Description" asp-for="Description" />
-
-        <input type="submit" class="btn btn-primary mt-3" value="Update Category" />
+        <input class="form-control mt-2" type="text" placeholder="Enter Category Name" asp-for="Name" value="" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Update Category" />
     </form>
 </div>
