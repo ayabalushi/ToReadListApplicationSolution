@@ -24,8 +24,10 @@ namespace ToReadListApplication.DbContextManager
                 .HasMaxLength(100); 
 
             modelBuilder.Entity<Book>()
-                .Property(t => t.Rate)
-                .HasDefaultValue(0); 
+               .Property(t => t.Rate)
+               .HasDefaultValue(0)
+               .HasAnnotation("RateRangeMin", 1)
+               .HasAnnotation("RateRangeMax", 5);
 
             modelBuilder.Entity<Book>()
                 .Property(t => t.ImageUrl)

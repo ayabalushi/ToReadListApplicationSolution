@@ -74,61 +74,51 @@ namespace ToReadListApplication.Controllers
 
 
         [HttpPost]
-        public IActionResult Update(Book obj)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int id, [Bind("Id,Name,Description,Author,Rate,ImageUrl,PublishDate,CategoryId")] Book book)
         {
-            if (obj == null)
+            if (id != book.Id)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                var existingBook = _dbcontext.Books.Find(obj.Id);
-                if (existingBook == null)
+                try
                 {
-                    return NotFound();
-                }
+                    var existingBook = await _dbcontext.Books.FindAsync(id);
 
-                // Update only the fields that are provided
-                if (!string.IsNullOrEmpty(obj.Name))
-                {
-                    existingBook.Name = obj.Name;
-                }
-
-                if (!string.IsNullOrEmpty(obj.Description))
-                {
-                    existingBook.Description = obj.Description;
-                }
-
-                if (obj.Rate > 0) // Assuming rate should be a positive number
-                {
-                    existingBook.Rate = obj.Rate;
-                }
-
-                if (obj.CategoryId > 0) // Ensure a valid CategoryId
-                {
-                    // Validate CategoryId
-                    if (_dbcontext.Categories.Any(c => c.Id == obj.CategoryId))
+                    if (existingBook == null)
                     {
-                        existingBook.CategoryId = obj.CategoryId;
+                        return NotFound();
+                    }
+
+                    // Update only changed fields
+                    _dbcontext.Entry(existingBook).CurrentValues.SetValues(book);
+
+                    await _dbcontext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BookExists(book.Id))
+                    {
+                        return NotFound();
                     }
                     else
                     {
-                        ModelState.AddModelError("CategoryId", "Selected category does not exist.");
-                        ViewBag.CategoryId = new SelectList(_dbcontext.Categories, "Id", "Name", obj.CategoryId);
-                        return View(obj);
+                        throw;
                     }
                 }
-
-                _dbcontext.Books.Update(existingBook);
-                _dbcontext.SaveChanges();
-
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.CategoryId = new SelectList(_dbcontext.Categories, "Id", "Name", obj.CategoryId);
-            return View(obj);
+            return View(book);
         }
+
+        private bool BookExists(int id)
+        {
+            return _dbcontext.Books.Any(e => e.Id == id);
+        }
+
 
         // Delete
         public IActionResult Delete(int id)

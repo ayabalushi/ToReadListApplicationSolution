@@ -28,8 +28,20 @@
             <textarea asp-for="Description" class="form-control mt-2" placeholder="Enter Book Description"></textarea>
         </div>
         <div class="mb-3">
+            <label asp-for="Author" class="control-label"></label>
+            <input asp-for="Author" class="form-control mt-2" placeholder="Enter Author Name" />
+        </div>
+        <div class="mb-3">
             <label asp-for="Rate" class="control-label"></label>
-            <input asp-for="Rate" type="number" class="form-control mt-2" placeholder="Enter Book Rate" />
+            <input asp-for="Rate" type="number" min="1" max="5" class="form-control mt-2" placeholder="Enter Book Rate (1 to 5)" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="control-label"></label>
+            <input asp-for="ImageUrl" class="form-control mt-2" placeholder="Enter Image URL" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="PublishDate" class="control-label"></label>
+            <input asp-for="PublishDate" type="date" class="form-control mt-2" />
         </div>
         <div class="mb-3">
             <label asp-for="CategoryId" class="control-label"></label>
